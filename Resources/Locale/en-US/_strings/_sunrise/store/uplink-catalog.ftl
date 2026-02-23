@@ -1,4 +1,4 @@
-## Targets
+﻿## Targets
 
 uplink-core-extraction-toolbox-name = Core Extraction Toolbox
 uplink-core-extraction-toolbox-desc = A toolbox containing everything you need to remove a nuclear bomb's plutonium core. Instructions not included.
@@ -19,8 +19,6 @@ uplink-magazine-bulldog-uraniumslug-desc = Shotgun magazine with 8 shells filled
 uplink-magazine-bulldog-uranium-desc = Shotgun magazine with 8 shells filled with uranium pellet. Compatible with the Bulldog.
 uplink-pistol-magnum-magazine-name = Магазин для Deagle
 uplink-pistol-magnum-magazine-desc = 7-зарядный однорядный магазин для пистолета. Содержит патроны SP. Совместим с "Диглом".
-uplink-pistoltec9-magazine-name = магазин Tac-Tec (.20 безгильзовый)
-uplink-pistoltec9-magazine-desc = Кустарный пистолетный магазин на 20 патронов,под калибр, используемый агентами синдиката.
 ## Misc
 
 uplink-music-boombox-name = Музыкальный набор синдиката
@@ -150,4 +148,5 @@ uplink-energy-dome-desc = A personal shield generator that protects the wearer f
 
 uplink-syndicate-teleporter-name = Hand syndicate teleporter
 uplink-syndicate-teleporter-desc = An experimental hand teleporting device. Teleports its owner forward in a small area. Be careful not to end up in the wall.
+
 
