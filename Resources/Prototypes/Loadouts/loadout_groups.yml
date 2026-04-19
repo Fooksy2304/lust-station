@@ -21,22 +21,6 @@
   - BoxFolderBaseThreePapers
   - BoxFolderPlasticClipboardThreePapers
   - BoxFolderClipboardThreePapers
-  # Sunrise-Start
-  - ClothingWraps
-  - ClothingWrapsHigh
-  - ClothingNeckNanoTrasenPin
-  - ClothingNeckNakamuraPin
-  - ClothingNeckLogistikaPin
-  - ClothingNeckDeForestPin
-  - ClothingNeckDonkPin
-  - ClothingNeckVitezstviPin
-  - ClothingNeckEarthPin
-  - ClothingNeckUSSPPin
-  - ClothingNeckReedIndustriesPin
-  - CorporateLaw
-  - ClothingNeckPlanetPrisonLockdownPin
-  - ClothingNeckPlanetPrisonCellblockPin
-  # Sunrise-End
   - ClothingNeckLGBTPin
   - ClothingNeckAllyPin
   - ClothingNeckAromanticPin
@@ -104,8 +88,6 @@
   - EmergencyNitrogen
   - EmergencyOxygen
   - LoadoutSpeciesVoxNitrogen
-  - EmergencyWithoutGas  # Sunrise-Edit
-  - EmergencyDwarf  # Sunrise-Edit
 
 # nitrogen or oxygen tank, depending on what your species needs
 - type: loadoutGroup
@@ -140,11 +122,6 @@
   loadouts:
   - CaptainHead
   - CaptainCap
-  # Sunrise-Start
-  - CaptainCapWhite
-  - CaptainCapBlack
-  - EliteCaptainCap
-  # Sunrise-End
 
 - type: loadoutGroup
   id: CaptainJumpsuit
@@ -154,12 +131,6 @@
   - CaptainJumpskirt
   - CaptainFormalSuit
   - CaptainFormalSkirt
-  # Sunrise - Start: captain cap uniforms
-  - CaptainJumpsuitCapWhite
-  - CaptainJumpsuitCapBlack
-  - CaptainJumpskirtCapWhite
-  - CaptainJumpskirtCapBlack
-  # Sunrise - End
 
 - type: loadoutGroup
   id: CaptainNeck
@@ -169,15 +140,7 @@
   - CaptainCloak
   - CaptainCloakFormal
   - CaptainMantle
-  - CaptainSpecialCloak # Lust Station
-  # Sunrise - Start
-  - CaptainEliteCloak
-  - CaptainScarf
-  - CaptainMantleWhite
-  - CaptainMantleWhiteShoulder
-  - CaptainMantleBlack
-  - CaptainMantleBlackShoulder
-  # Sunrise - End
+  - CaptainSpecialCloak # Lust-Edit
 
 - type: loadoutGroup
   id: CaptainBackpack
@@ -186,37 +149,13 @@
   - CaptainBackpack
   - CaptainSatchel
   - CaptainDuffel
-  # Sunrise - Start
-  - CaptainBackpackWhite
-  - CaptainBackpackBlack
-  - CaptainSatchelWhite
-  - CaptainSatchelBlack
-  - CaptainDuffelWhite
-  - CaptainDuffelBlack
-  # Sunrise - End
-
-# Sunrise - Start
-- type: loadoutGroup
-  id: CaptainGloves
-  name: loadout-group-captain-gloves
-  minLimit: 1
-  maxLimit: 1
-  loadouts:
-  - CaptainGloves
-  - CaptainGlovesWhite
-  - CaptainGlovesBlack
-# Sunrise - End
 
 - type: loadoutGroup
   id: CaptainOuterClothing
   name: loadout-group-captain-outerclothing
   loadouts:
-  - CaptainOuterArmor # Sunrise-Edit
-  - CaptainOuterCoat # Sunrise-Edit
-  - CaptainOuterOverCoat  # Sunrise-Edit
+  - CaptainOuterArmor
   - CaptainWintercoat
-  - CaptainCarapaceWhite # Sunrise-Edit
-  - CaptainCarapaceBlack # Sunrise-Edit
 
 - type: loadoutGroup
   id: CaptainJobTrinkets
@@ -246,8 +185,7 @@
   loadouts:
   - HoPCloak
   - HoPMantle
-  - HoPScarf # Sunrise-Edit
-  - HopSpecialCloak # Lust Station
+  - HopSpecialCloak # Lust-Edit
 
 - type: loadoutGroup
   id: HoPBackpack
@@ -304,7 +242,6 @@
   - CommonBackpack
   - CommonSatchel
   - CommonDuffel
-  - CommonModsuit #Sunrise-edit
 
 - type: loadoutGroup
   id: PassengerNeck
@@ -532,7 +469,6 @@
   loadouts:
   - JanitorJumpsuit
   - JanitorJumpskirt
-  - MaidJumpskirt
 
 - type: loadoutGroup
   id: JanitorGloves
@@ -646,8 +582,6 @@
   - EmergencyNitrogenClown
   - EmergencyOxygenClown
   - LoadoutSpeciesVoxNitrogen
-  - EmergencyWithoutGasClown # Sunrise-Edit
-  - EmergencyDwarfClown # Sunrise-Edit
 
 - type: loadoutGroup
   id: ClownJobTrinkets
@@ -713,8 +647,6 @@
   - EmergencyOxygenMime
   - EmergencySpeciesMothMime
   - LoadoutSpeciesVoxNitrogen
-  - EmergencyWithoutGasMime # Sunrise-Edit
-  - EmergencyDwarfMime # Sunrise-Edit
 
 - type: loadoutGroup
   id: MimeJobTrinkets
@@ -729,7 +661,6 @@
   loadouts:
   - MusicianJumpsuit
   - MusicianJumpskirt
-  - MusicianPunkSuit # Sunrise - Edit
 
 - type: loadoutGroup
   id: MusicianOuterClothing
@@ -737,7 +668,6 @@
   minLimit: 0
   loadouts:
   - MusicianWintercoat
-  - MusicianLeatherJacket # Sunrise - Edit
 
 - type: loadoutGroup
   id: Instruments
@@ -773,7 +703,6 @@
   - PanFlute
   - Ocarina
   - Bagpipe
-  - SuperSynthesizer
 
 - type: loadoutGroup
   id: MusicianJobTrinkets
@@ -790,23 +719,6 @@
   loadouts:
   - QuartermasterHead
   - QuartermasterBeret
-#Sunrise-start
-  - Sunrise-BandOrange
-  - Sunrise-BandYellow
-  - Sunrise-BandBrown
-  - Sunrise-BandPurple
-  - StationEngineerHardhatOrange
-  - StationEngineerHardhatYellow
-  - Sunrise-HardhatYellowDark
-  - Sunrise-HatOrangesoft
-  - Sunrise-HatYellowsoft
-  - Sunrise-HatBrownsoft
-  - Sunrise-BrownFlatcap
-  - Sunrise-FedoraBrown
-  - Sunrise-CatBrown
-  - Sunrise-HelmetCosmonaut
-  - Sunrise-HideBear
-#Sunrise-end
 
 - type: loadoutGroup
   id: QuartermasterJumpsuit
@@ -825,15 +737,7 @@
   loadouts:
   - QuartermasterCloak
   - QuartermasterMantle
-  - QuartermasterScarf # Sunrise-Edit
-  - QuartermasterSpecialCloak # Lust Station
-#Sunrise-start
-  - Sunrise-ScarfOrange
-  - Sunrise-ScarfYellow
-  - Sunrise-ScarfBrown
-  - Sunrise-ScarfPurple
-  - Sunrise-BedsheetCosmos
-#Sunrise-end
+  - QuartermasterSpecialCloak # Lust-Edit
 
 - type: loadoutGroup
   id: QuartermasterOuterClothing
@@ -841,17 +745,6 @@
   minLimit: 0
   loadouts:
   - QuartermasterWintercoat
-#Sunrise-start
-  - SalvageSpecialistWintercoat
-  - Sunrise-WinterColorOrange
-  - Sunrise-WinterColorYellow
-  - Sunrise-WinterColorBrown
-  - Sunrise-WinterColorLightBrown
-  - Sunrise-WinterColorPurple
-  - Sunrise-PonchoClassic
-  - Sunrise-CoatBomber
-  - Sunrise-CoatTrench
-#Sunrise-end
 
 - type: loadoutGroup
   id: QuartermasterShoes
@@ -859,13 +752,6 @@
   loadouts:
   - BrownShoes
   - CargoWinterBoots
-#Sunrise-start
-  - BlackShoes
-  - Sunrise-OrangeShoes
-  - Sunrise-YellowShoes
-  - Sunrise-ShoesPurple
-  - Sunrise-ShoesLeather
-#Sunrise-end
 
 - type: loadoutGroup
   id: QuartermasterJobTrinkets
@@ -880,17 +766,6 @@
   minLimit: 0
   loadouts:
   - CargoTechnicianHead
-#Sunrise-start
-  - Sunrise-BandOrange
-  - Sunrise-BandYellow
-  - Sunrise-BandBrown
-  - Sunrise-HatOrangesoft
-  - Sunrise-HatYellowsoft
-  - Sunrise-HatBrownsoft
-  - Sunrise-BrownFlatcap
-  - Sunrise-CatBrown
-  - Sunrise-HelmetCosmonaut
-#Sunrise-end
 
 - type: loadoutGroup
   id: CargoTechnicianJumpsuit
@@ -913,14 +788,6 @@
   minLimit: 0
   loadouts:
   - CargoTechnicianWintercoat
-#Sunrise-start
-  - Sunrise-WinterColorOrange
-  - Sunrise-WinterColorYellow
-  - Sunrise-WinterColorBrown
-  - Sunrise-WinterColorLightBrown
-  - Sunrise-PonchoClassic
-  - Sunrise-CoatBomber
-#Sunrise-end
 
 - type: loadoutGroup
   id: CargoTechnicianShoes
@@ -928,11 +795,6 @@
   loadouts:
   - BlackShoes
   - CargoWinterBoots
-#Sunrise-start
-  - Sunrise-OrangeShoes
-  - Sunrise-YellowShoes
-  - BrownShoes
-#Sunrise-end
 
 - type: loadoutGroup
   id: CargoTechnicianID
@@ -962,15 +824,6 @@
   minLimit: 0
   loadouts:
   - SalvageSpecialistWintercoat
-#Sunrise-start
-  - Sunrise-WinterColorOrange
-  - Sunrise-WinterColorYellow
-  - Sunrise-WinterColorBrown
-  - Sunrise-WinterColorLightBrown
-  - Sunrise-WinterColorPurple
-  - Sunrise-PonchoClassic
-  - Sunrise-CoatBomber
-#Sunrise-end
 
 - type: loadoutGroup
   id: SalvageSpecialistShoes
@@ -978,13 +831,6 @@
   loadouts:
   - SalvageBoots
   - CargoWinterBoots
-#Sunrise-start
-  - BlackShoes
-  - Sunrise-OrangeShoes
-  - Sunrise-YellowShoes
-  - BrownShoes
-  - Sunrise-ShoesPurple
-#Sunrise-end
 
 - type: loadoutGroup
   id: SalvageSpecialistJobTrinkets
@@ -1011,14 +857,6 @@
   - ChiefEngineerCloak
   - ChiefEngineerMantle
   - ChiefEngineerScarf
-  #sunrise-start
-  - Sunrise-ScarfRed
-  - Sunrise-ScarfOrange
-  - Sunrise-ScarfYellow
-  - Sunrise-ScarfCyan
-  - Sunrise-ScarfLightBlue
-  - Sunrise-TieRed
-  #Sunrise-end
 
 - type: loadoutGroup
   id: ChiefEngineerOuterClothing
@@ -1026,16 +864,6 @@
   minLimit: 0
   loadouts:
   - ChiefEngineerWintercoat
-  #Sunrise-start
-  - Sunrise-WinterColorrColorWhite
-  - Sunrise-ClothingOuterFlannelWhite
-  - StationEngineerOuterVest
-  - StationEngineerWintercoat
-  - AtmosphericTechnicianWintercoat
-  - Sunrise-WinterColorrColorRed
-  - Sunrise-WinterColorOrange
-  - Sunrise-WinterColorYellow
-  #Sunrise-end
 
 - type: loadoutGroup
   id: ChiefEngineerShoes
@@ -1043,12 +871,6 @@
   loadouts:
   - BrownShoes
   - EngineeringWinterBoots
-#sunrise-start
-  - WhiteShoes
-  - Sunrise-RedShoes
-  - Sunrise-OrangeShoes
-  - Sunrise-YellowShoes
-#Sunrise-end
 
 - type: loadoutGroup
   id: ChiefEngineerJobTrinkets
@@ -1076,22 +898,9 @@
   name: loadout-group-station-engineer-head
   minLimit: 0
   loadouts:
-#sunrise-start
-  - Sunrise-EngineerHeadBeret
-  - Sunrise-AtmosBeret
-  - Sunrise-BandRed
-  - Sunrise-BandOrange
-  - Sunrise-BandYellow
-  - Sunrise-HardhatYellowDark
-#Sunrise-end
   - StationEngineerHardhatYellow
   - StationEngineerHardhatOrange
   - StationEngineerHardhatRed
-#sunrise-start
-  - Sunrise-HatRedsoft
-  - Sunrise-HatOrangesoft
-  - Sunrise-HatYellowsoft
-#Sunrise-end
 
 - type: loadoutGroup
   id: StationEngineerJumpsuit
@@ -1116,22 +925,19 @@
   loadouts:
   - StationEngineerOuterVest
   - StationEngineerWintercoat
-#sunrise-start
-  - Sunrise-WinterColorrColorRed
-  - Sunrise-WinterColorOrange
-  - Sunrise-WinterColorYellow
-#sunrise-end
 - type: loadoutGroup
   id: StationEngineerShoes
   name: loadout-group-station-engineer-shoes
   loadouts:
   - WorkBoots
   - EngineeringWinterBoots
-#sunrise-start
-  - Sunrise-RedShoes
-  - Sunrise-OrangeShoes
-  - Sunrise-YellowShoes
-#sunrise-end
+
+- type: loadoutGroup
+  id: StationEngineerID
+  name: loadout-group-station-engineer-id
+  loadouts:
+  - StationEngineerPDA
+  - SeniorEngineerPDA
 
 - type: loadoutGroup
   id: StationEngineerJobTrinkets
@@ -1154,12 +960,6 @@
   minLimit: 0
   loadouts:
   - AtmosphericTechnicianWintercoat
-#sunrise-start
-  - StationEngineerOuterVest
-  - Sunrise-WinterColorrColorRed
-  - Sunrise-WinterColorOrange
-  - Sunrise-WinterColorYellow
-#sunrise-end
 
 - type: loadoutGroup
   id: AtmosphericTechnicianBackpack
@@ -1175,11 +975,6 @@
   loadouts:
   - WhiteShoes
   - EngineeringWinterBoots
-#sunrise-start
-  - Sunrise-RedShoes
-  - Sunrise-OrangeShoes
-  - Sunrise-YellowShoes
-#sunrise-end
 
 - type: loadoutGroup
   id: AtmosphericTechnicianJobTrinkets
@@ -1197,8 +992,6 @@
   - EmergencyNitrogenExtended
   - EmergencyOxygenExtended
   - LoadoutSpeciesVoxNitrogen
-  - EmergencyWithoutGasExtended # Sunrise-Edit
-  - EmergencyDwarfExtended # Sunrise-Edit
 
 # Science
 - type: loadoutGroup
@@ -1208,8 +1001,7 @@
   loadouts:
   - ResearchDirectorMantle
   - ResearchDirectorCloak
-  - ResearchDirectorScarf # Sunrise-Edit
-  - RdSpecialCloak # Lust Station
+  - RdSpecialCloak # Lust-Edit
 
 - type: loadoutGroup
   id: ResearchDirectorJumpsuit
@@ -1297,6 +1089,14 @@
   - PurpleGloves
 
 - type: loadoutGroup
+  id: ScientistPDA
+  name: loadout-group-scientist-id
+  loadouts:
+  - ScientistPDA
+  - SeniorResearcherPDA
+
+
+- type: loadoutGroup
   id: ScientistJobTrinkets
   name: loadout-group-jobtrinkets
   minLimit: 0
@@ -1325,11 +1125,6 @@
   loadouts:
   - HeadofSecurityHead
   - HeadofSecurityBeret
-  #Sunrise-Start
-  - HeadofSecurityHatCap
-  - HeadofSecurityCapUSSPBlack
-  - HeadofSecurityCapLeather
-  #Sunrise-End
 
 - type: loadoutGroup
   id: HeadofSecurityJumpsuit
@@ -1341,9 +1136,7 @@
   - HeadofSecurityTurtleneckSkirt
   - HeadofSecurityFormalSuit
   - HeadofSecurityFormalSkirt
-  - HeadofSecurityJumpsuitHoSOld  #Sunrise-Edit
-  - HeadofSecurityJumpsuitUSSPBlack #Sunrise-Edit
-  - HeadofSecurityJumpsuitElegant #Lust-Edit
+  - HeadofSecurityJumpsuitElegant # Lust-Edit
 
 - type: loadoutGroup
   id: HeadofSecurityNeck
@@ -1352,10 +1145,7 @@
   loadouts:
   - HeadofSecurityCloak
   - HeadofSecurityMantle
-  - HeadofSecurityDarthHOSCloak #Sunrise-Edit
-  - HeadofSecurityCloakHOSCloak #Sunrise-Edit
-  - HeadofSecurityScarf #Sunrise-Edit
-  - HosSpecialCloak # Lust Station
+  - HosSpecialCloak # Lust-Edit
 
 - type: loadoutGroup
   id: HeadofSecurityOuterClothing
@@ -1363,12 +1153,6 @@
   loadouts:
   - HeadofSecurityCoat
   - HeadofSecurityWinterCoat
-  #Sunrise-Start
-  - HeadofSecurityGreatcoat
-  - HeadofSecurityGreatcoatBlack
-  - HeadofSecurityOvercoat
-  - HeadofSecurityUSSPBlack
-  #Sunrise-End
 
 - type: loadoutGroup
   id: HeadofSecurityJobTrinkets
@@ -1385,7 +1169,6 @@
   loadouts:
   - WardenHead
   - WardenBeret
-  - ClothingHeadHatCapWardenAlt # Sunrise-Edit
 
 - type: loadoutGroup
   id: WardenJumpsuit
@@ -1400,7 +1183,6 @@
   loadouts:
   - WardenCoat
   - WardenArmoredWinterCoat
-  - ClothingOuterCoatWardenAlt # Sunrise-Edit
 
 - type: loadoutGroup
   id: WardenJobTrinkets
@@ -1413,7 +1195,6 @@
 - type: loadoutGroup
   id: SecurityHead
   name: loadout-group-security-head
-  minLimit: 0
   loadouts:
   - SecurityHelmet
   - SecurityBeret
@@ -1428,8 +1209,6 @@
   - SecurityJumpskirt
   - SecurityJumpsuitGrey
   - SecurityJumpskirtGrey
-#  - SeniorOfficerJumpsuit # Sunrise-Edit
-#  - SeniorOfficerJumpskirt # Sunrise-Edit
   - TrooperUniform
 
 - type: loadoutGroup
@@ -1445,19 +1224,8 @@
   name: loadout-group-security-belt
   loadouts:
   - SecurityBelt
-  - SecuritySheathBelt # Lust Station
+  - SecuritySheathBelt # Lust-Edit
   - SecurityWebbing
-
-# Lust-start
-- type: loadoutGroup
-  id: SecurityGlasses
-  name: loadout-group-security-glasses
-  loadouts:
-  - EyesHudSecurity
-  - EyesGlassesSecurity
-  - EyesHudSecurityAlt
-  - EyesEyepatchHudSecurity
-# Lust-end
 
 - type: loadoutGroup
   id: SecurityOuterClothing
@@ -1503,8 +1271,7 @@
   minLimit: 0
   loadouts:
   - DetectiveTie
-  - DetectiveTieHorrific #Sunrise-add
-  - SecurityCloak # Lust Station
+  - SecurityCloak # Lust-Edit
 
 - type: loadoutGroup
   id: DetectiveJumpsuit
@@ -1522,7 +1289,6 @@
   - DetectiveArmorVest
   - DetectiveCoat
   - DetectiveCoatGrey
-  - DetectiveCoatDark # Sunrise-edit
 
 - type: loadoutGroup
   id: DetectiveJobTrinkets
@@ -1555,8 +1321,6 @@
   - EmergencyNitrogenSecurity
   - EmergencyOxygenSecurity
   - LoadoutSpeciesVoxNitrogen
-  - EmergencyWithoutGasSecurity # Sunrise-Edit
-  - EmergencyDwarfSecurity # Sunrise-Edit
 
 # Medical
 - type: loadoutGroup
@@ -1565,26 +1329,7 @@
   minLimit: 0
   loadouts:
   - ChiefMedicalOfficerBeret
-  - ParamedicBeret # Sunrise-Edit
   - CMOMedicalHeadMirror
-# Sunrise-start
-  - BeretSeniorPhysician
-  - MedicalBeret
-  - ChemistBeret #Sunrise-edit
-  - PatologonatBeret #Sunrise-edit
-  - NurseHat
-  - BlueSurgeryCap
-  - GreenSurgeryCap
-  - PurpleSurgeryCap
-  - HatPatologonatHat
-  - ParamedicHead
-  - Sunrise-HatBlacksoft
-  - Sunrise-HatRedsoft
-  - Sunrise-HatOrangesoft
-  - Sunrise-HatCyansoft
-  - Sunrise-HatBluesoft
-  - MedicalHeadMirror
-# Sunrise-end
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerJumpsuit
@@ -1602,27 +1347,6 @@
   loadouts:
   - ChiefMedicalOfficerLabCoat
   - ChiefMedicalOfficerWintercoat
-# Sunrise-start
-  - RegularLabCoat
-  - Sunrise-CoatLabViro
-  - ChemistLabCoat
-  - Sunrise-CoatLabGene
-  - CoatLabSeniorPhysician
-  - CoatPatologoanatom
-  - Sunrise-WinterViro
-  - ChemistWintercoat
-  - Sunrise-WinterGen
-  - MedicalDoctorWintercoat
-  - ParamedicWintercoat
-  - Sunrise-WinterColorrColorWhite
-  - Sunrise-WinterColorBlack
-  - Sunrise-WinterColorrColorRed
-  - Sunrise-WinterColorOrange
-  - Sunrise-WinterColorGreen
-  - Sunrise-WinterColorCyan
-  - Sunrise-WinterColorBlue
-  - ParamedicWindbreaker
-# Sunrise-end
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerNeck
@@ -1631,32 +1355,13 @@
   loadouts:
   - ChiefMedicalOfficerCloak
   - ChiefMedicalOfficerMantle
-  - ChiefMedicalOfficerScarf # Sunrise-Edit
-  - CmoSpecialCloak # Lust Station
-# Sunrise-start
-  - Sunrise-ScarfRed
-  - Sunrise-ScarfOrange
-  - Sunrise-ScarfGreen
-  - Sunrise-ScarfLightBlue
-  - Sunrise-ScarfCyan
-  - Sunrise-ScarfBlue
-  - Sunrise-Stethoscope
-# Sunrise-end
+  - CmoSpecialCloak # Lust-Edit
 
 - type: loadoutGroup
   id: ChiefMedicalOfficerShoes
   name: loadout-group-chief-medical-officer-shoes
   loadouts:
   - BrownShoes
-# Sunrise-start
-  - WhiteShoes
-  - BlackShoes
-  - Sunrise-RedShoes
-  - Sunrise-OrangeShoes
-  - Sunrise-ShoesGreen
-  - Sunrise-ShoesCyan
-  - BlueShoes
-# Sunrise-end
   - MedicalWinterBoots
 
 - type: loadoutGroup
@@ -1677,11 +1382,6 @@
   - GreenSurgeryCap
   - PurpleSurgeryCap
   - NurseHat
-# Sunrise-start
-  - Sunrise-HatRedsoft
-  - Sunrise-HatOrangesoft
-  - Sunrise-HatCyansoft
-# Sunrise-end
 
 - type: loadoutGroup
   id: MedicalDoctorJumpsuit
@@ -1699,12 +1399,6 @@
   minLimit: 0
   loadouts:
   - RegularLabCoat
-  # Sunrise-start
-  - Sunrise-WinterColorrColorWhite
-  - Sunrise-WinterColorrColorRed
-  - Sunrise-WinterColorGreen
-  - Sunrise-WinterColorCyan
-# Sunrise-end
   - MedicalDoctorWintercoat
 
 - type: loadoutGroup
@@ -1720,13 +1414,14 @@
   name: loadout-group-medical-doctor-shoes
   loadouts:
   - WhiteShoes
-# Sunrise-start
-  - Sunrise-RedShoes
-  - Sunrise-OrangeShoes
-  - Sunrise-ShoesGreen
-  - Sunrise-ShoesCyan
-# Sunrise-end
   - MedicalWinterBoots
+
+- type: loadoutGroup
+  id: MedicalDoctorPDA
+  name: loadout-group-medical-doctor-id
+  loadouts:
+  - MedicalPDA
+  - SeniorPhysicianPDA
 
 - type: loadoutGroup
   id: MedicalGloves
@@ -1734,14 +1429,6 @@
   minLimit: 0
   loadouts:
   - LatexGloves
-# Sunrise-start
-  - Sunrise-WhiteGloves
-  - Sunrise-RedGloves
-  - Sunrise-GreenGloves
-  - Sunrise-TealGloves
-  # - Sunrise-GlovesNitrileRed
-  # - Sunrise-GlovesNitrileGreen
-# Sunrise-end
   - NitrileGloves
 
 - type: loadoutGroup
@@ -1749,16 +1436,7 @@
   name: loadout-group-medical-mask
   minLimit: 0
   loadouts:
-# Sunrise-start
-  - Sunrise-MedicalSterileRed
-  - Sunrise-MedicalSterileGreen
-# Sunrise-end
   - SterileMask
-# Sunrise-start
-  - Sunrise-MedicalMaskRed
-  - Sunrise-MedicalMaskGreen
-  - Sunrise-MedicalMask
-# Sunrise-end
 
 - type: loadoutGroup
   id: MedicalDoctorJobTrinkets
@@ -1794,19 +1472,8 @@
   minLimit: 0
   loadouts:
   - RegularLabCoat
-# Sunrise-start
-  - RegularLabCoat
-# Sunrise-end
   - ChemistLabCoat
   - ChemistWintercoat
-# Sunrise-start
-  - MedicalDoctorWintercoat
-  - Sunrise-WinterColorrColorWhite
-  - Sunrise-WinterColorrColorRed
-  - Sunrise-WinterColorOrange
-  - Sunrise-WinterColorGreen
-  - Sunrise-WinterColorCyan
-# Sunrise-end
 
 - type: loadoutGroup
   id: ChemistBackpack
@@ -1828,22 +1495,7 @@
   name: loadout-group-paramedic-head
   minLimit: 0
   loadouts:
-# Sunrise-start
-  - MedicalBeret
-  - NurseHat
-  - BlueSurgeryCap
-  - GreenSurgeryCap
-  - PurpleSurgeryCap
-# Sunrise-end
   - ParamedicHead
-  - ParamedicBeret # Sunrise-Edit
-# Sunrise-start
-  - Sunrise-HatRedsoft
-  - Sunrise-HatOrangesoft
-  - Sunrise-HatCyansoft
-  - Sunrise-HatBluesoft
-  - MedicalHeadMirror
-# Sunrise-end
 
 - type: loadoutGroup
   id: ParamedicJumpsuit
@@ -1858,30 +1510,12 @@
   minLimit: 0
   loadouts:
   - ParamedicWindbreaker
-# Sunrise-start
-  - RegularLabCoat
-  - MedicalDoctorWintercoat
-# Sunrise-end
   - ParamedicWintercoat
-# Sunrise-start
-  - Sunrise-WinterColorrColorWhite
-  - Sunrise-WinterColorrColorRed
-  - Sunrise-WinterColorGreen
-  - Sunrise-WinterColorCyan
-  - Sunrise-WinterColorBlue
-# Sunrise-end
 
 - type: loadoutGroup
   id: ParamedicShoes
   name: loadout-group-paramedic-shoes
   loadouts:
-# Sunrise-start
-  - WhiteShoes
-  - Sunrise-RedShoes
-  - Sunrise-OrangeShoes
-  - Sunrise-ShoesGreen
-  - Sunrise-ShoesCyan
-# Sunrise-end
   - BlueShoes
   - WhiteShoes
   - MedicalWinterBoots
@@ -1913,8 +1547,6 @@
   - EmergencyNitrogenMedical
   - EmergencyOxygenMedical
   - LoadoutSpeciesVoxNitrogen
-  - EmergencyWithoutGasMedical # Sunrise-Edit
-  - EmergencyDwarfMedical # Sunrise-Edit
 
 # Wildcards
 - type: loadoutGroup
@@ -1955,8 +1587,6 @@
   - EmergencyNitrogenSyndicate
   - EmergencyOxygenSyndicate
   - LoadoutSpeciesVoxNitrogen
-  - EmergencyWithoutGasSyndicate # Sunrise-Edit
-  - EmergencyDwarfSyndicate # Sunrise-Edit
 
 - type: loadoutGroup
   id: SurvivalMilitaryDouble
@@ -1994,25 +1624,3 @@
   loadouts:
   - LoadoutSpeciesBreathToolSecurity
 
-# Sunrise-start
-- type: loadoutGroup
-  id: StationEngineerID
-  name: loadout-group-station-engineer-id
-  loadouts:
-  - StationEngineerPDA
-  - SeniorEngineerPDA
-
-- type: loadoutGroup
-  id: ScientistPDA
-  name: loadout-group-scientist-id
-  loadouts:
-  - ScientistPDA
-  - SeniorResearcherPDA
-
-- type: loadoutGroup
-  id: MedicalDoctorPDA
-  name: loadout-group-medical-doctor-id
-  loadouts:
-  - MedicalPDA
-  - SeniorPhysicianPDA
-# Sunrise-edn

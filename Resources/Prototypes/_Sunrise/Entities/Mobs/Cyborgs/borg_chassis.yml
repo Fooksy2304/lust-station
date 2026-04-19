@@ -6,9 +6,14 @@
   - type: BorgSwitchableType
     selectedBorgType: security
   - type: Loadout
-    prototypes: [ BorgArmorSiliconLoadoutMk2 ]
+    prototypes: [ BorgArmorSiliconLoadout ]
   - type: Tag
     tags:
+    - DoorBumpOpener
+    - FootstepSound
+    - CanPilot
+    - SiliconEmotes
+    - Unimplantable
     - NoPaint
 
 - type: entity
@@ -112,12 +117,12 @@
   - type: InnateItem
     entityTargetActions:
     - AccessBreaker
-  # Lust-start
+  # Lust-Start
   - type: ActionGrant
     actions:
     - ActionViewLaws
   - type: StandingState
-  # Lust-end
+  # Lust-End
 
 - type: startingGear
   id: SyndiReaperHardsuitGear
@@ -185,7 +190,7 @@
     - Common
     - Science
     - Command
-    - CentCom
+    - ERT
   - type: ActiveRadio
     channels:
     - Security
@@ -193,7 +198,7 @@
     - Common
     - Science
     - Command
-    - CentCom
+    - ERT
   - type: AccessReader
     access: [["Security"], ["Command"], ["Research"]]
   - type: SiliconLawProvider
@@ -218,6 +223,7 @@
     - CanPilot
     - FootstepSound
     - EmagImmune
+    - NoPaint
   - type: InnateItem
     instantActions:
     - PortableSurveillanceCameraMonitorUnpowered
@@ -232,12 +238,12 @@
   - type: PowerCellDraw # Use it to increase battery life further
     drawRate: 0.5
   - type: ToggleableNightVision
-  # Lust-start
+  # Lust-Start
   - type: ActionGrant
     actions:
     - ActionViewLaws
   - type: StandingState
-  # Lust-end
+  # Lust-End
 
 - type: entity
   id: BorgChassisSyndicateHeavy
@@ -348,12 +354,12 @@
   - type: InnateItem
     entityTargetActions:
     - AccessBreaker
-  # Lust-start
+  # Lust-Start
   - type: ActionGrant
     actions:
     - ActionViewLaws
   - type: StandingState
-  # Lust-end
+  # Lust-End
 
 - type: entity
   id: BorgChassisSyndicateSpider
@@ -435,12 +441,12 @@
   - type: InnateItem
     entityTargetActions:
     - AccessBreaker
-  # Lust-start
+  # Lust-Start
   - type: ActionGrant
     actions:
     - ActionViewLaws
   - type: StandingState
-  # Lust-end
+  # Lust-End
 
 - type: entity
   parent: BaseBorgChassisSyndicateDerelict
@@ -591,6 +597,10 @@
     - AccessBreaker
   - type: Construction
     node: derelictcyborg
+
+- type: entity
+  id: SyndicateSaboteurBorgChassisDerelict
+  parent: SyndicateSaboteurBorgChassisDerelictSunrise
 
 - type: entity
   parent: BaseBorgChassisSyndicateDerelict

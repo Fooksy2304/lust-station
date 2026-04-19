@@ -63,7 +63,7 @@
       Male: MaleSlime
       Female: FemaleSlime
       Unsexed: MaleSlime
-      Futanari: FemaleSlime # Lust-edit
+      Futanari: FemaleSlime # Lust-Edit
   - type: Damageable
     damageContainer: Biological
     damageModifierSet: Slime
@@ -118,7 +118,7 @@
   - type: Butcherable
     butcheringType: Spike
     spawned:
-    - id: FoodMeatSlime
+    - id: FoodMeatSlimeJelly # Sunrise - edit
       amount: 5
   - type: Respirator
     damage:
