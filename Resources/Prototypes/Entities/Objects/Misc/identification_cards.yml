@@ -1058,6 +1058,8 @@
     - sprite: *icon-rsi
       offset: *icon-offset
       state: Syndicate
+  - type: IdCard
+    jobIcon: JobIconSyndicate
   - type: Item
     heldPrefix: black
   - type: Access
@@ -1212,6 +1214,7 @@
   parent: IDCardStandard
   id: CentcomIDCard
   name: command officer ID card
+  suffix: Central Command # Lust add
   components:
   # Sunrise-Start
   - type: Sprite
@@ -1234,6 +1237,7 @@
   parent: IDCardStandard
   id: ERTLeaderIDCard
   name: ERT leader ID card
+  suffix: ERT # Lust add
   components:
   # Sunrise-Start
   - type: Sprite
@@ -1255,6 +1259,7 @@
   parent: IDCardStandard
   id: ERTChaplainIDCard
   name: ERT chaplain ID card
+  suffix: ERT # Lust add
   components:
   # Sunrise-Start
   - type: Sprite
@@ -1276,6 +1281,7 @@
   parent: IDCardStandard
   id: ERTEngineerIDCard
   name: ERT engineer ID card
+  suffix: ERT # Lust add
   components:
   # Sunrise-Start
   - type: Sprite
@@ -1297,6 +1303,7 @@
   parent: IDCardStandard
   id: ERTJanitorIDCard
   name: ERT janitor ID card
+  suffix: ERT # Lust add
   components:
   # Sunrise-Start
   - type: Sprite
@@ -1318,6 +1325,7 @@
   parent: IDCardStandard
   id: ERTMedicIDCard
   name: ERT medic ID card
+  suffix: ERT # Lust add
   components:
   # Sunrise-Start
   - type: Sprite
@@ -1339,6 +1347,7 @@
   parent: IDCardStandard
   id: ERTSecurityIDCard
   name: ERT security ID card
+  suffix: ERT # Lust add
   components:
   # Sunrise-Start
   - type: Sprite
@@ -1359,6 +1368,7 @@
 - type: entity
   parent: IDCardStandard
   id: CentcomIDCardDeathsquad
+  suffix: Death Squad # Lust add
   name: death squad ID card
   components:
   # Sunrise-Start

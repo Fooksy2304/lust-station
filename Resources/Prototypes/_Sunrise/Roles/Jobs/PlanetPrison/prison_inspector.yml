@@ -12,7 +12,6 @@
       time: 7200 # 2 hrs
   weight: 8
   alwaysUseSpawner: true
-  canBeAntag: false
   startingGear: PrisonInspectorGear
   icon: "JobIconPrisonInspector"
   overrideConsoleVisibility: false
@@ -59,7 +58,7 @@
       - BoxEvidenceMarkers
       - DrinkDetFlask
       - RubberStampPrisonInspector
-      - PenCentcom
+      - PenCentcomQillu # Lust-Edit
 
 - type: chameleonOutfit
   id: PrisonInspectorChameleonOutfit

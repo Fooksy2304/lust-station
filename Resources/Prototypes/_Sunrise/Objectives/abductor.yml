@@ -209,13 +209,13 @@
 
 - type: entity                                      #Service subgroup
   parent: BaseAbductorVictimStealObjective
-  id: AbductorVictimClothingEyesHudBeerStealObjective
+  id: AbductorVictimClothingEyesHudsStealObjective
   components:
   - type: NotJobRequirement
     jobs:
     - Bartender
   - type: StealCondition
-    stealGroup: ClothingEyesHudBeer
+    stealGroup: ClothingEyesHuds
   - type: Objective
     difficulty: 0.3
 
@@ -395,7 +395,7 @@
   weights:
     AbductorVictimClothingHeadsetAltMedicalStealObjective: 1
     AbductorVictimFireAxeStealObjective: 1
-    AbductorVictimClothingEyesHudBeerStealObjective: 1
+    AbductorVictimClothingEyesHudsStealObjective: 1
     AbductorVictimBibleStealObjective: 1
 
 - type: weightedRandom
@@ -411,7 +411,8 @@
   weights:
     AbductorVictimIanStealObjective: 1
     AbductorVictimBingusStealObjective: 1
-    AbductorVictimMcGriffStealObjective: 1
+    # AbductorVictimMcGriffStealObjective: 1 # Lust-Edit
+    AbductorVictimMcShoeStealObjective: 1 # Lust-Add
     AbductorVictimWalterStealObjective: 1
     AbductorVictimMortyStealObjective: 1
     AbductorVictimRenaultStealObjective: 1

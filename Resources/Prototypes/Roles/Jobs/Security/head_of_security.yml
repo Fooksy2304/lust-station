@@ -4,9 +4,13 @@
   description: job-description-hos
   playTimeTracker: JobHeadOfSecurity
   requirements:
+    # Lust-edit-start
+    - !type:AgeRequirement
+      requiredAge: 26
+    # Lust-edit-end
     - !type:RoleTimeRequirement
       role: JobWarden
-      time: 1h
+      time: 3h
     - !type:RoleTimeRequirement
       role: JobDetective
       time: 1h # knowing how to use the tools is important
@@ -20,7 +24,6 @@
   startingGear: HoSGear
   icon: "JobIconHeadOfSecurity"
   supervisors: job-supervisors-captain
-  canBeAntag: false
   radioBold: true # Sunrise-Edit
   displayWeight: 80 # Sunrise-Edit
   # Sunrise-Start
@@ -49,6 +52,7 @@
       - type: CommandStaff
   speciesBlacklist:
   - Vox # Sunrise-Edit
+  - Felinid # Lust-Edit
 
 - type: startingGear
   id: HoSGear
