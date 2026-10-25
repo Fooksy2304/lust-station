@@ -18,6 +18,7 @@ public sealed class LustRevolverAmmoCounterSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<RevolverAmmoProviderComponent, ComponentStartup>(OnRevolverStartup);
+        SubscribeLocalEvent<AmmoCounterComponent, ComponentStartup>(OnAmmoCounterStartup);
         SubscribeLocalEvent<RevolverAmmoProviderComponent, ItemStatusCollectMessage>(OnItemStatusCollect);
     }
 
@@ -25,6 +26,12 @@ public sealed class LustRevolverAmmoCounterSystem : EntitySystem
     {
         // У штатного счётчика нет сетевого состояния; заменяем его только на клиенте.
         RemComp<AmmoCounterComponent>(ent);
+    }
+
+    private void OnAmmoCounterStartup(Entity<AmmoCounterComponent> ent, ref ComponentStartup args)
+    {
+        if (HasComp<RevolverAmmoProviderComponent>(ent))
+            RemComp<AmmoCounterComponent>(ent);
     }
 
     private void OnItemStatusCollect(Entity<RevolverAmmoProviderComponent> ent, ref ItemStatusCollectMessage args)
