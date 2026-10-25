@@ -107,7 +107,7 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
             return TryComp<KnockedDownComponent>(ent, out var knockedDown) &&
                    _stun.CanStand((ent.Owner, knockedDown));
 
-        if (!TryComp<BorgChassisComponent>(ent, out var borg) || borg.BrainEntity == null)
+        if (!HasComp<BorgChassisComponent>(ent))
             return false;
 
         if (!HasComp<ActorComponent>(ent))

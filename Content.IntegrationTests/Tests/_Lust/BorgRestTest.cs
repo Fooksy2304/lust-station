@@ -1,3 +1,4 @@
+using Content.Client.Actions;
 using Content.IntegrationTests.Fixtures;
 using Content.Shared._Lust.Borgs;
 using Content.Shared._Lust.Borgs.Components;
@@ -5,6 +6,7 @@ using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Stunnable;
+using Robust.Client.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 
@@ -14,6 +16,49 @@ namespace Content.IntegrationTests.Tests._Lust;
 public sealed class BorgRestTest : GameTest
 {
     public override PoolSettings PoolSettings => new() { Connected = true, Dirty = true };
+
+    [Test]
+    public async Task ActionButtonTogglesRestWithoutBrain()
+    {
+        var borg = await SpawnControlledBorg(insertBrain: false);
+        NetEntity actionNet = default;
+        NetEntity borgNet = default;
+
+        await Server.WaitPost(() =>
+        {
+            var action = SEntMan.GetComponent<BorgRestActionComponent>(borg).ToggleActionEntity;
+            Assert.That(action, Is.Not.Null);
+            actionNet = SEntMan.GetNetEntity(action.Value);
+            borgNet = SEntMan.GetNetEntity(borg);
+        });
+
+        await Pair.RunTicksSync(5);
+        await Client.WaitPost(() =>
+        {
+            var action = CEntMan.GetEntity(actionNet);
+            Client.System<ActionsSystem>().TriggerAction((action, CEntMan.GetComponent<ActionComponent>(action)));
+        });
+
+        await Pair.RunTicksSync(5);
+        await Server.WaitAssertion(() => Assert.That(SEntMan.HasComponent<BorgRestingComponent>(borg), Is.True));
+        await Client.WaitAssertion(() =>
+        {
+            var clientBorg = CEntMan.GetEntity(borgNet);
+            var sprite = Client.System<SpriteSystem>();
+            Assert.That(sprite.TryGetLayer((clientBorg, null), BorgVisualLayers.Resting, out var resting, false), Is.True);
+            Assert.That(resting!.Visible, Is.True);
+        });
+
+        await Pair.RunTicksSync(35);
+        await Client.WaitPost(() =>
+        {
+            var action = CEntMan.GetEntity(actionNet);
+            Client.System<ActionsSystem>().TriggerAction((action, CEntMan.GetComponent<ActionComponent>(action)));
+        });
+
+        await Pair.RunTicksSync(60);
+        await Server.WaitAssertion(() => Assert.That(SEntMan.HasComponent<BorgRestingComponent>(borg), Is.False));
+    }
 
     [Test]
     public async Task StandingFromRestDoesNotClearExternalKnockdown()
@@ -77,7 +122,7 @@ public sealed class BorgRestTest : GameTest
         });
     }
 
-    private async Task<EntityUid> SpawnControlledBorg()
+    private async Task<EntityUid> SpawnControlledBorg(bool insertBrain = true)
     {
         var map = await Pair.CreateTestMap();
         var containers = Server.System<SharedContainerSystem>();
@@ -87,13 +132,17 @@ public sealed class BorgRestTest : GameTest
         await Server.WaitPost(() =>
         {
             borg = SEntMan.SpawnEntity("BorgChassisGeneric", map.GridCoords);
-            var brain = SEntMan.SpawnEntity("PositronicBrain", map.GridCoords);
-            var chassis = SEntMan.GetComponent<BorgChassisComponent>(borg);
-            brainInserted = containers.Insert(brain, chassis.BrainContainer);
+            if (insertBrain)
+            {
+                var brain = SEntMan.SpawnEntity("PositronicBrain", map.GridCoords);
+                var chassis = SEntMan.GetComponent<BorgChassisComponent>(borg);
+                brainInserted = containers.Insert(brain, chassis.BrainContainer);
+            }
             Server.PlayerMan.SetAttachedEntity(ServerSession!, borg);
         });
 
-        await Server.WaitAssertion(() => Assert.That(brainInserted, Is.True));
+        if (insertBrain)
+            await Server.WaitAssertion(() => Assert.That(brainInserted, Is.True));
 
         return borg;
     }
