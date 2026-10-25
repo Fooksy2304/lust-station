@@ -17,7 +17,7 @@ public sealed partial class BorgRestActionComponent : Component
     /// Action prototype used to sit down or stand up.
     /// </summary>
     [DataField]
-    public EntProtoId ToggleAction = "ActionBorgToggleRest";
+    public EntProtoId ToggleAction = "LustActionBorgToggleRest";
 
     /// <summary>
     /// Action entity currently granted to the borg.

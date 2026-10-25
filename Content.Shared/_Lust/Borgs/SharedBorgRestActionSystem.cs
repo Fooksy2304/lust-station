@@ -8,12 +8,12 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._Lust.Borgs;
 
-public sealed class SharedBorgRestActionSystem : EntitySystem
+public sealed partial class SharedBorgRestActionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
 
     public override void Initialize()
     {
@@ -90,10 +90,7 @@ public sealed class SharedBorgRestActionSystem : EntitySystem
         Entity<BorgRestActionComponent> borgRest = (ent.Owner, ent.Comp);
 
         if (HasComp<BorgRestingComponent>(ent))
-        {
-            DoStandUp(borgRest);
-            return true;
-        }
+            return DoStandUp(borgRest);
 
         return DoRest(borgRest);
     }
@@ -107,7 +104,8 @@ public sealed class SharedBorgRestActionSystem : EntitySystem
             return false;
 
         if (HasComp<BorgRestingComponent>(ent))
-            return true;
+            return TryComp<KnockedDownComponent>(ent, out var knockedDown) &&
+                   _stun.CanStand((ent.Owner, knockedDown));
 
         if (!TryComp<BorgChassisComponent>(ent, out var borg) || borg.BrainEntity == null)
             return false;
@@ -115,7 +113,7 @@ public sealed class SharedBorgRestActionSystem : EntitySystem
         if (!HasComp<ActorComponent>(ent))
             return false;
 
-        return _mobState.IsAlive(ent);
+        return _mobState.IsAlive(ent) && !HasComp<KnockedDownComponent>(ent);
     }
 
     private bool DoRest(Entity<BorgRestActionComponent> ent)
@@ -131,10 +129,9 @@ public sealed class SharedBorgRestActionSystem : EntitySystem
         return true;
     }
 
-    private void DoStandUp(Entity<BorgRestActionComponent> ent)
+    private bool DoStandUp(Entity<BorgRestActionComponent> ent)
     {
-        RemComp<BorgRestingComponent>(ent);
-        RemComp<KnockedDownComponent>(ent);
+        return _stun.TryStanding((ent.Owner, null));
     }
 
     private void SetRestingVisualRotation(EntityUid uid)

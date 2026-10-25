@@ -1,0 +1,14 @@
+- type: entity
+  parent: BaseToggleAction
+  id: LustActionBorgToggleRest
+  name: sit down
+  description: Sit down or stand up.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _Lust/Mobs/Silicon/chassis.rsi
+      state: robot
+    useDelay: 0.5
+  - type: InstantAction
+    event: !type:BorgToggleRestActionEvent
