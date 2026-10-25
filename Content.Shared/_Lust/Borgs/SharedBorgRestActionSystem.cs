@@ -1,6 +1,7 @@
 using Content.Shared._Lust.Borgs.Components;
 using Content.Shared.Actions;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Rotation;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Stunnable;
@@ -13,7 +14,7 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private MobStateSystem _mobState = default!;
-    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
 
     public override void Initialize()
     {
@@ -24,7 +25,7 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
         SubscribeLocalEvent<BorgRestActionComponent, BorgToggleRestActionEvent>(OnToggleRest);
         SubscribeLocalEvent<BorgRestingComponent, ComponentStartup>(OnRestingStartup);
         SubscribeLocalEvent<BorgRestingComponent, ComponentRemove>(OnRestingRemove);
-        SubscribeLocalEvent<KnockedDownComponent, ComponentRemove>(OnKnockedDownRemove);
+        SubscribeLocalEvent<BorgRestingComponent, RefreshMovementSpeedModifiersEvent>(OnRestingSpeed);
     }
 
     private void OnStartup(Entity<BorgRestActionComponent> ent, ref ComponentStartup args)
@@ -49,6 +50,8 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
 
     private void OnRestingStartup(Entity<BorgRestingComponent> ent, ref ComponentStartup args)
     {
+        _movementSpeed.RefreshMovementSpeedModifiers(ent);
+
         if (TryComp<BorgRestActionComponent>(ent, out var borgRest))
             UpdateActionState((ent.Owner, borgRest));
     }
@@ -56,14 +59,15 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
     private void OnRestingRemove(Entity<BorgRestingComponent> ent, ref ComponentRemove args)
     {
         ClearRestingVisual(ent.Owner);
+        _movementSpeed.RefreshMovementSpeedModifiers(ent);
 
         if (TryComp<BorgRestActionComponent>(ent, out var borgRest))
             UpdateActionState((ent.Owner, borgRest), resting: false);
     }
 
-    private void OnKnockedDownRemove(Entity<KnockedDownComponent> ent, ref ComponentRemove args)
+    private void OnRestingSpeed(Entity<BorgRestingComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        RemCompDeferred<BorgRestingComponent>(ent);
+        args.ModifySpeed(0f);
     }
 
     private void UpdateActionState(Entity<BorgRestActionComponent> ent)
@@ -104,8 +108,7 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
             return false;
 
         if (HasComp<BorgRestingComponent>(ent))
-            return TryComp<KnockedDownComponent>(ent, out var knockedDown) &&
-                   _stun.CanStand((ent.Owner, knockedDown));
+            return !HasComp<KnockedDownComponent>(ent);
 
         if (!HasComp<BorgChassisComponent>(ent))
             return false;
@@ -118,12 +121,6 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
 
     private bool DoRest(Entity<BorgRestActionComponent> ent)
     {
-        if (!_stun.TryKnockdown(ent.Owner, null, refresh: true, autoStand: false, drop: false, force: true))
-        {
-            ClearRestingVisual(ent);
-            return false;
-        }
-
         EnsureComp<BorgRestingComponent>(ent);
         SetRestingVisual(ent, true);
         return true;
@@ -131,7 +128,7 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
 
     private bool DoStandUp(Entity<BorgRestActionComponent> ent)
     {
-        return _stun.TryStanding((ent.Owner, null));
+        return RemComp<BorgRestingComponent>(ent);
     }
 
     private void SetRestingVisualRotation(EntityUid uid)

@@ -4,6 +4,7 @@ using Content.Shared._Lust.Borgs;
 using Content.Shared._Lust.Borgs.Components;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
+using Content.Shared.Movement.Components;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Stunnable;
 using Robust.Client.GameObjects;
@@ -16,6 +17,44 @@ namespace Content.IntegrationTests.Tests._Lust;
 public sealed class BorgRestTest : GameTest
 {
     public override PoolSettings PoolSettings => new() { Connected = true, Dirty = true };
+
+    [Test]
+    public async Task RestPersistsWithoutInput()
+    {
+        var borg = await SpawnControlledBorg(insertBrain: false);
+        var rest = Server.System<SharedBorgRestActionSystem>();
+        var rested = false;
+
+        await Server.WaitPost(() => rested = rest.TryToggleRest((borg, null)));
+        await Server.WaitAssertion(() => Assert.That(rested, Is.True));
+        await Pair.RunTicksSync(180);
+
+        await Server.WaitAssertion(() =>
+        {
+            Assert.That(SEntMan.HasComponent<BorgRestingComponent>(borg), Is.True);
+            Assert.That(SEntMan.HasComponent<KnockedDownComponent>(borg), Is.False);
+            var speed = SEntMan.GetComponent<MovementSpeedModifierComponent>(borg);
+            Assert.That(speed.CurrentWalkSpeed, Is.Zero);
+            Assert.That(speed.CurrentSprintSpeed, Is.Zero);
+        });
+    }
+
+    [Test]
+    public async Task RestPersistsWhenKnockdownIsCleared()
+    {
+        var borg = await SpawnControlledBorg(insertBrain: false);
+        var rest = Server.System<SharedBorgRestActionSystem>();
+
+        await Server.WaitPost(() => rest.TryToggleRest((borg, null)));
+        await Server.WaitPost(() =>
+        {
+            SEntMan.AddComponent<KnockedDownComponent>(borg);
+            SEntMan.RemoveComponent<KnockedDownComponent>(borg);
+        });
+        await Pair.RunTicksSync(5);
+
+        await Server.WaitAssertion(() => Assert.That(SEntMan.HasComponent<BorgRestingComponent>(borg), Is.True));
+    }
 
     [Test]
     public async Task ActionButtonTogglesRestWithoutBrain()
@@ -49,7 +88,15 @@ public sealed class BorgRestTest : GameTest
             Assert.That(resting!.Visible, Is.True);
         });
 
-        await Pair.RunTicksSync(35);
+        await Pair.RunTicksSync(180);
+        await Server.WaitAssertion(() => Assert.That(SEntMan.HasComponent<BorgRestingComponent>(borg), Is.True));
+        await Client.WaitAssertion(() =>
+        {
+            var clientBorg = CEntMan.GetEntity(borgNet);
+            var sprite = Client.System<SpriteSystem>();
+            Assert.That(sprite.TryGetLayer((clientBorg, null), BorgVisualLayers.Resting, out var resting, false), Is.True);
+            Assert.That(resting!.Visible, Is.True);
+        });
         await Client.WaitPost(() =>
         {
             var action = CEntMan.GetEntity(actionNet);
@@ -65,14 +112,13 @@ public sealed class BorgRestTest : GameTest
     {
         var borg = await SpawnControlledBorg();
         var rest = Server.System<SharedBorgRestActionSystem>();
-        var stun = Server.System<SharedStunSystem>();
         var rested = false;
         var stood = false;
 
         await Server.WaitPost(() =>
         {
             rested = rest.TryToggleRest((borg, null));
-            stun.UpdateKnockdownTime(borg, TimeSpan.FromSeconds(30));
+            SEntMan.AddComponent<KnockedDownComponent>(borg);
             stood = rest.TryToggleRest((borg, null));
         });
 
@@ -119,6 +165,9 @@ public sealed class BorgRestTest : GameTest
         {
             Assert.That(SEntMan.HasComponent<BorgRestingComponent>(borg), Is.False);
             Assert.That(SEntMan.HasComponent<KnockedDownComponent>(borg), Is.False);
+            var speed = SEntMan.GetComponent<MovementSpeedModifierComponent>(borg);
+            Assert.That(speed.CurrentWalkSpeed, Is.GreaterThan(0f));
+            Assert.That(speed.CurrentSprintSpeed, Is.GreaterThan(0f));
         });
     }
 
