@@ -2,6 +2,10 @@ using Content.Shared._Lust.Borgs.Components;
 using Content.Shared.Actions;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Power;
+using Content.Shared.Power.EntitySystems;
+using Content.Shared.PowerCell;
+using Content.Shared.PowerCell.Components;
 using Content.Shared.Rotation;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Stunnable;
@@ -15,6 +19,8 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private SharedBatterySystem _battery = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
 
     public override void Initialize()
     {
@@ -26,6 +32,7 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
         SubscribeLocalEvent<BorgRestingComponent, ComponentStartup>(OnRestingStartup);
         SubscribeLocalEvent<BorgRestingComponent, ComponentRemove>(OnRestingRemove);
         SubscribeLocalEvent<BorgRestingComponent, RefreshMovementSpeedModifiersEvent>(OnRestingSpeed);
+        SubscribeLocalEvent<BorgRestingComponent, RefreshChargeRateEvent>(OnRestingChargeRate);
     }
 
     private void OnStartup(Entity<BorgRestActionComponent> ent, ref ComponentStartup args)
@@ -51,6 +58,7 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
     private void OnRestingStartup(Entity<BorgRestingComponent> ent, ref ComponentStartup args)
     {
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
+        RefreshBatteryChargeRate(ent);
 
         if (TryComp<BorgRestActionComponent>(ent, out var borgRest))
             UpdateActionState((ent.Owner, borgRest));
@@ -60,6 +68,7 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
     {
         ClearRestingVisual(ent.Owner);
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
+        RefreshBatteryChargeRate(ent);
 
         if (TryComp<BorgRestActionComponent>(ent, out var borgRest))
             UpdateActionState((ent.Owner, borgRest), resting: false);
@@ -68,6 +77,21 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
     private void OnRestingSpeed(Entity<BorgRestingComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
         args.ModifySpeed(0f);
+    }
+
+    private void OnRestingChargeRate(Entity<BorgRestingComponent> ent, ref RefreshChargeRateEvent args)
+    {
+        // Lust edit - компенсируем обычный расход борга и добавляем 10% ёмкости за две минуты.
+        if (TryComp<PowerCellDrawComponent>(ent, out var draw) && draw.Enabled)
+            args.NewChargeRate += draw.DrawRate;
+
+        args.NewChargeRate += args.MaxCharge / 1200f;
+    }
+
+    private void RefreshBatteryChargeRate(EntityUid uid)
+    {
+        if (_powerCell.TryGetBatteryFromSlot(uid, out var battery))
+            _battery.RefreshChargeRate(battery.Value.AsNullable());
     }
 
     private void UpdateActionState(Entity<BorgRestActionComponent> ent)
@@ -128,7 +152,11 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
 
     private bool DoStandUp(Entity<BorgRestActionComponent> ent)
     {
-        return RemComp<BorgRestingComponent>(ent);
+        if (!RemComp<BorgRestingComponent>(ent))
+            return false;
+
+        RefreshBatteryChargeRate(ent);
+        return true;
     }
 
     private void SetRestingVisualRotation(EntityUid uid)

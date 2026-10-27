@@ -2,6 +2,8 @@ using System.Numerics;
 using Content.Server._Sunrise.PlayerCache;
 using Content.Server.Chat.Systems;
 using Content.Server.Fluids.EntitySystems;
+using Content.Shared._Lust.Borgs;
+using Content.Shared._Lust.Borgs.Components;
 using Content.Shared._Sunrise.Aphrodisiac;
 using Content.Shared._Sunrise.InteractionsPanel.Data.Components;
 using Content.Shared._Sunrise.InteractionsPanel.Data.Prototypes;
@@ -52,6 +54,7 @@ public partial class InteractionsPanel
         SubscribeLocalEvent<InteractionsComponent, ClothingDidUnequippedEvent>(ClothingDidUnequipped);
         SubscribeLocalEvent<InteractionsComponent, DidEquipHandEvent>(DidEquipped);
         SubscribeLocalEvent<InteractionsComponent, DidUnequipHandEvent>(DidUnequipped);
+        SubscribeLocalEvent<BorgSexComponent, BorgSexChangedEvent>(OnBorgSexChanged); // Lust edit - обновляем открытую панель после выбора пола.
 
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.Interact, new PointerInputCmdHandler(HandleInteract))
@@ -140,6 +143,11 @@ public partial class InteractionsPanel
     private void DidEquipped(EntityUid uid, InteractionsComponent component, DidEquipHandEvent args)
     {
         UpdateUIForClothingChange(uid);
+    }
+
+    private void OnBorgSexChanged(Entity<BorgSexComponent> ent, ref BorgSexChangedEvent args)
+    {
+        UpdateUIForClothingChange(ent.Owner);
     }
 
     private void DidUnequipped(EntityUid uid, InteractionsComponent component, DidUnequipHandEvent args)
@@ -319,8 +327,9 @@ public partial class InteractionsPanel
         if (string.IsNullOrWhiteSpace(type) || type == "none")
             return;
 
-        var sex = TryComp<HumanoidProfileComponent>(ent, out var humanoid)
-            ? humanoid.Sex.ToString().ToLowerInvariant()
+        // Lust edit - пол борга выбирается отдельно от профиля гуманоида.
+        var sex = BorgSexSystem.TryGetSex(ent, EntityManager, out var selectedSex)
+            ? selectedSex.ToString().ToLowerInvariant()
             : "unknown";
 
         switch (type.ToLowerInvariant())
@@ -502,7 +511,8 @@ public partial class InteractionsPanel
         _chatSystem.TrySendInGameICMessage(uid, "кончает", InGameICChatType.Emote, false);
         _chatSystem.TryEmoteWithChat(uid, "Moan");
 
-        if (TryComp<HumanoidProfileComponent>(uid, out var humanoidAppearanceComponent) && humanoidAppearanceComponent.Sex == Sex.Male)
+        // Lust edit - учитываем выбранный пол борга.
+        if (BorgSexSystem.TryGetSex(uid, EntityManager, out var selectedSex) && selectedSex == Sex.Male)
             SpawnSemen("Semen", Transform(uid).Coordinates);
         // Lust-Edit-Start
         RaiseLocalEvent(new OrgasmPerformedEvent

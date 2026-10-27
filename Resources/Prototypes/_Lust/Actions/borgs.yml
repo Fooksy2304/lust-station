@@ -7,8 +7,23 @@
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _Lust/Mobs/Silicon/chassis.rsi
-      state: robot
+      sprite: _Lust/Interface/Actions/energy_recover.rsi
+      state: energy_recover
     useDelay: 0.5
   - type: InstantAction
     event: !type:BorgToggleRestActionEvent
+
+- type: entity
+  parent: BaseAction
+  id: LustActionBorgCycleSex
+  name: select cyborg sex
+  description: Cycle the sex used by the interactions panel.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: Effects/hearts.rsi
+      state: hearts
+    useDelay: 0.5
+  - type: InstantAction
+    event: !type:BorgCycleSexActionEvent
