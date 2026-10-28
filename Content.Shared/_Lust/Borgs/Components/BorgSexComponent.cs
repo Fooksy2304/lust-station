@@ -11,7 +11,10 @@ namespace Content.Shared._Lust.Borgs.Components;
 [Access(typeof(BorgSexSystem))]
 public sealed partial class BorgSexComponent : Component
 {
-    [DataField, AutoNetworkedField]
+    /// <summary>
+    /// Stores the selected sex used by interactions.
+    /// </summary>
+    [AutoNetworkedField]
     public Sex Sex = Sex.Unsexed;
 }
 

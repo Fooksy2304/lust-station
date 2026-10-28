@@ -145,11 +145,6 @@ public partial class InteractionsPanel
         UpdateUIForClothingChange(uid);
     }
 
-    private void OnBorgSexChanged(Entity<BorgSexComponent> ent, ref BorgSexChangedEvent args)
-    {
-        UpdateUIForClothingChange(ent.Owner);
-    }
-
     private void DidUnequipped(EntityUid uid, InteractionsComponent component, DidUnequipHandEvent args)
     {
         UpdateUIForClothingChange(uid);

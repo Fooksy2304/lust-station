@@ -1,5 +1,6 @@
 using Content.Shared._Lust.Borgs.Components;
 using Content.Shared.Alert;
+using Content.Shared.PowerCell;
 using Robust.Client.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -11,6 +12,7 @@ public sealed partial class LustBorgPassiveRechargeAlertSystem : EntitySystem
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private AlertsSystem _alerts = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
 
     private static readonly ProtoId<AlertPrototype> PassiveRechargeAlert = "LustPassiveRecharge";
     private static readonly TimeSpan UpdateDelay = TimeSpan.FromSeconds(0.5);
@@ -37,7 +39,7 @@ public sealed partial class LustBorgPassiveRechargeAlertSystem : EntitySystem
 
         _nextUpdate = _timing.CurTime + UpdateDelay;
 
-        if (HasComp<BorgRestingComponent>(uid))
+        if (HasComp<BorgRestingComponent>(uid) && _powerCell.TryGetBatteryFromSlot(uid, out _))
         {
             _alerts.ShowAlert(uid, PassiveRechargeAlert);
             return;

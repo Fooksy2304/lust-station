@@ -32,6 +32,7 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
         SubscribeLocalEvent<BorgRestingComponent, ComponentStartup>(OnRestingStartup);
         SubscribeLocalEvent<BorgRestingComponent, ComponentRemove>(OnRestingRemove);
         SubscribeLocalEvent<BorgRestingComponent, RefreshMovementSpeedModifiersEvent>(OnRestingSpeed);
+        SubscribeLocalEvent<BorgRestingComponent, RefreshWeightlessModifiersEvent>(OnRestingWeightless);
         SubscribeLocalEvent<BorgRestingComponent, RefreshChargeRateEvent>(OnRestingChargeRate);
     }
 
@@ -58,6 +59,7 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
     private void OnRestingStartup(Entity<BorgRestingComponent> ent, ref ComponentStartup args)
     {
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
+        _movementSpeed.RefreshWeightlessModifiers(ent);
         RefreshBatteryChargeRate(ent);
 
         if (TryComp<BorgRestActionComponent>(ent, out var borgRest))
@@ -68,6 +70,7 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
     {
         ClearRestingVisual(ent.Owner);
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
+        _movementSpeed.RefreshWeightlessModifiers(ent);
         RefreshBatteryChargeRate(ent);
 
         if (TryComp<BorgRestActionComponent>(ent, out var borgRest))
@@ -77,6 +80,11 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
     private void OnRestingSpeed(Entity<BorgRestingComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
         args.ModifySpeed(0f);
+    }
+
+    private void OnRestingWeightless(Entity<BorgRestingComponent> ent, ref RefreshWeightlessModifiersEvent args)
+    {
+        args.WeightlessModifier = 0f;
     }
 
     private void OnRestingChargeRate(Entity<BorgRestingComponent> ent, ref RefreshChargeRateEvent args)
@@ -159,15 +167,15 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
         return true;
     }
 
-    private void SetRestingVisualRotation(EntityUid uid)
+    private void SetRestingVisualRotation(EntityUid uid, bool resting)
     {
-        _appearance.SetData(uid, RotationVisuals.RotationState, RotationState.Vertical);
+        _appearance.SetData(uid, RotationVisuals.RotationState, resting ? RotationState.Vertical : RotationState.Horizontal);
     }
 
     private void SetRestingVisual(EntityUid uid, bool resting)
     {
         _appearance.SetData(uid, BorgRestVisuals.Resting, resting);
-        SetRestingVisualRotation(uid);
+        SetRestingVisualRotation(uid, resting);
     }
 
     private void ClearRestingVisual(EntityUid uid)

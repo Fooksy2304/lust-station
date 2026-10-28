@@ -36,7 +36,12 @@ public sealed partial class BorgSystem
         _sprite.LayerSetVisible((ent.Owner, ent.Comp3), BorgVisualLayers.Body, alive && !resting);
 
         if (alive && !resting)
+        {
+            if (_sprite.LayerExists((ent.Owner, ent.Comp3), BorgVisualLayers.LightStatus))
+                _sprite.LayerSetVisible((ent.Owner, ent.Comp3), BorgVisualLayers.LightStatus, true);
+
             return;
+        }
 
         _sprite.LayerSetVisible((ent.Owner, ent.Comp3), BorgVisualLayers.Light, false);
 
