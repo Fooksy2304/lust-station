@@ -45,16 +45,41 @@ public sealed class BorgRestTest : GameTest
     {
         var borg = await SpawnControlledBorg(insertBrain: false);
         var rest = Server.System<SharedBorgRestActionSystem>();
+        var borgNet = default(NetEntity);
 
-        await Server.WaitPost(() => rest.TryToggleRest((borg, null)));
+        await Server.WaitPost(() =>
+        {
+            borgNet = SEntMan.GetNetEntity(borg);
+            rest.TryToggleRest((borg, null));
+        });
+        await Pair.RunTicksSync(10);
+        await Client.WaitAssertion(() =>
+        {
+            var clientBorg = CEntMan.GetEntity(borgNet);
+            var sprite = CEntMan.GetComponent<SpriteComponent>(clientBorg);
+            Assert.That(sprite.Rotation.Degrees, Is.EqualTo(90).Within(0.01));
+        });
+
         await Server.WaitPost(() =>
         {
             SEntMan.AddComponent<KnockedDownComponent>(borg);
             SEntMan.RemoveComponent<KnockedDownComponent>(borg);
         });
-        await Pair.RunTicksSync(5);
+        await Pair.RunTicksSync(10);
 
-        await Server.WaitAssertion(() => Assert.That(SEntMan.HasComponent<BorgRestingComponent>(borg), Is.True));
+        await Server.WaitAssertion(() =>
+        {
+            Assert.That(SEntMan.HasComponent<BorgRestingComponent>(borg), Is.True);
+            var appearance = Server.System<SharedAppearanceSystem>();
+            Assert.That(appearance.TryGetData(borg, RotationVisuals.RotationState, out RotationState rotationState), Is.True);
+            Assert.That(rotationState, Is.EqualTo(RotationState.Horizontal));
+        });
+        await Client.WaitAssertion(() =>
+        {
+            var clientBorg = CEntMan.GetEntity(borgNet);
+            var sprite = CEntMan.GetComponent<SpriteComponent>(clientBorg);
+            Assert.That(sprite.Rotation.Degrees, Is.EqualTo(90).Within(0.01));
+        });
     }
 
     [Test]
@@ -163,7 +188,7 @@ public sealed class BorgRestTest : GameTest
         {
             var clientBorg = CEntMan.GetEntity(borgNet);
             var sprite = CEntMan.GetComponent<SpriteComponent>(clientBorg);
-            Assert.That(sprite.Rotation.Degrees, Is.EqualTo(0).Within(0.01));
+            Assert.That(sprite.Rotation.Degrees, Is.EqualTo(90).Within(0.01));
         });
 
         await Server.WaitPost(() => startedStanding = rest.TryToggleRest((borg, null)));

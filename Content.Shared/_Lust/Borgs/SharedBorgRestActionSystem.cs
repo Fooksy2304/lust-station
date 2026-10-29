@@ -31,6 +31,7 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
         SubscribeLocalEvent<BorgRestActionComponent, BorgToggleRestActionEvent>(OnToggleRest);
         SubscribeLocalEvent<BorgRestingComponent, ComponentStartup>(OnRestingStartup);
         SubscribeLocalEvent<BorgRestingComponent, ComponentRemove>(OnRestingRemove);
+        SubscribeLocalEvent<KnockedDownComponent, ComponentRemove>(OnKnockedDownRemove);
         SubscribeLocalEvent<BorgRestingComponent, RefreshMovementSpeedModifiersEvent>(OnRestingSpeed);
         SubscribeLocalEvent<BorgRestingComponent, RefreshWeightlessModifiersEvent>(OnRestingWeightless);
         SubscribeLocalEvent<BorgRestingComponent, RefreshChargeRateEvent>(OnRestingChargeRate);
@@ -75,6 +76,12 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
 
         if (TryComp<BorgRestActionComponent>(ent, out var borgRest))
             UpdateActionState((ent.Owner, borgRest), resting: false);
+    }
+
+    private void OnKnockedDownRemove(Entity<KnockedDownComponent> ent, ref ComponentRemove args)
+    {
+        if (HasComp<BorgRestingComponent>(ent))
+            SetRestingVisualRotation(ent.Owner, resting: true);
     }
 
     private void OnRestingSpeed(Entity<BorgRestingComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
@@ -167,15 +174,15 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
         return true;
     }
 
-    private void SetRestingVisualRotation(EntityUid uid)
+    private void SetRestingVisualRotation(EntityUid uid, bool resting)
     {
-        _appearance.SetData(uid, RotationVisuals.RotationState, RotationState.Vertical);
+        _appearance.SetData(uid, RotationVisuals.RotationState, resting ? RotationState.Horizontal : RotationState.Vertical);
     }
 
     private void SetRestingVisual(EntityUid uid, bool resting)
     {
         _appearance.SetData(uid, BorgRestVisuals.Resting, resting);
-        SetRestingVisualRotation(uid);
+        SetRestingVisualRotation(uid, resting);
     }
 
     private void ClearRestingVisual(EntityUid uid)
