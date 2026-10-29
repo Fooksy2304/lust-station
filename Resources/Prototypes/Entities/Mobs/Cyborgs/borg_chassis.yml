@@ -17,10 +17,10 @@
       visible: false
     # Lust edit start - слои общего визуала сидения и поломки боргов
     - state: robot_rest
-      map: ["enum.BorgVisualLayers.Resting"]
+      map: ["enum.LustBorgVisualLayers.Resting"]
       visible: false
     - state: robot_wreck
-      map: ["enum.BorgVisualLayers.Wrecked"]
+      map: ["enum.LustBorgVisualLayers.Wrecked"]
       visible: false
     # Lust edit end
   - type: BorgChassis

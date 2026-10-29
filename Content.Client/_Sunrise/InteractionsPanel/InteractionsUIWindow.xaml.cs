@@ -2,7 +2,6 @@ using System.Linq;
 using System.Numerics;
 using Content.Client._Sunrise.InteractionsPanel.Models;
 using Content.Client.Stylesheets;
-using Content.Shared._Lust.Borgs;
 using Content.Shared._Sunrise.InteractionsPanel.Data.Components;
 using Content.Shared._Sunrise.InteractionsPanel.Data.Conditions;
 using Content.Shared._Sunrise.InteractionsPanel.Data.Prototypes;
@@ -304,34 +303,8 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
         }
 
 
-        // Lust edit - показываем гениталии по выбранному полу борга.
-        if (BorgSexSystem.TryGetSex(_entityManager.GetEntity(userEntity), _entityManager, out var userSex))
-        {
-            var userGenitals = GenitalsHelper.GetGenitals(userSex)
-                .OrderBy(slot => GenitalDisplayOrder.GetValueOrDefault(slot, 99))
-                .ToList();
-
-            var userGenitalsText = string.Join(", ", userGenitals.Select(GenitalSlotToString));
-            SetGenitalsText(UserGenitalsLabel, userGenitalsText);
-        }
-        else
-        {
-            SetGenitalsText(UserGenitalsLabel, "???");
-        }
-
-        if (!selfTargeting &&
-            BorgSexSystem.TryGetSex(_entityManager.GetEntity(targetEntity), _entityManager, out var targetSex))
-        {
-            var targetGenitals = GenitalsHelper.GetGenitals(targetSex)
-                .OrderBy(slot => GenitalDisplayOrder.GetValueOrDefault(slot, 99))
-                .ToList();
-            var targetGenitalsText = string.Join(", ", targetGenitals.Select(GenitalSlotToString));
-            SetGenitalsText(TargetGenitalsLabel, targetGenitalsText);
-        }
-        else
-        {
-            SetGenitalsText(TargetGenitalsLabel, "");
-        }
+        // Lust edit - формируем отображение гениталий в коде форка.
+        UpdateLustEntityInformation(userEntity, targetEntity, selfTargeting);
     }
 
     private void SetGenitalsText(Label label, string genitalsText)
@@ -1287,4 +1260,6 @@ public sealed partial class InteractionsUIWindow : DefaultWindow
     }
 
     #endregion
+
+    private partial void UpdateLustEntityInformation(NetEntity userEntity, NetEntity targetEntity, bool selfTargeting);
 }

@@ -23,15 +23,15 @@ public sealed partial class BorgSystem
                       && _appearance.TryGetData<bool>(ent.Owner, BorgRestVisuals.Resting, out var restingVisual, ent.Comp2)
                       && restingVisual;
 
-        if (TrySetDerivedLayerState(ent, BorgVisualLayers.Resting, bodyState, "rest"))
-            _sprite.LayerSetVisible((ent.Owner, ent.Comp3), BorgVisualLayers.Resting, resting);
+        if (TrySetDerivedLayerState(ent, LustBorgVisualLayers.Resting, bodyState, "rest"))
+            _sprite.LayerSetVisible((ent.Owner, ent.Comp3), LustBorgVisualLayers.Resting, resting);
         else
-            HideLayer(ent, BorgVisualLayers.Resting);
+            HideLayer(ent, LustBorgVisualLayers.Resting);
 
-        if (TrySetDerivedLayerState(ent, BorgVisualLayers.Wrecked, bodyState, "wreck"))
-            _sprite.LayerSetVisible((ent.Owner, ent.Comp3), BorgVisualLayers.Wrecked, !alive);
+        if (TrySetDerivedLayerState(ent, LustBorgVisualLayers.Wrecked, bodyState, "wreck"))
+            _sprite.LayerSetVisible((ent.Owner, ent.Comp3), LustBorgVisualLayers.Wrecked, !alive);
         else
-            HideLayer(ent, BorgVisualLayers.Wrecked);
+            HideLayer(ent, LustBorgVisualLayers.Wrecked);
 
         _sprite.LayerSetVisible((ent.Owner, ent.Comp3), BorgVisualLayers.Body, alive && !resting);
 
@@ -53,7 +53,7 @@ public sealed partial class BorgSystem
 
     private bool TryGetLayerState(
         Entity<BorgChassisComponent?, AppearanceComponent?, SpriteComponent?> ent,
-        BorgVisualLayers layer,
+        Enum layer,
         out string state)
     {
         state = string.Empty;
@@ -71,7 +71,7 @@ public sealed partial class BorgSystem
 
     private void HideLayer(
         Entity<BorgChassisComponent?, AppearanceComponent?, SpriteComponent?> ent,
-        BorgVisualLayers layer)
+        Enum layer)
     {
         if (_sprite.LayerExists((ent.Owner, ent.Comp3), layer))
             _sprite.LayerSetVisible((ent.Owner, ent.Comp3), layer, false);
@@ -79,7 +79,7 @@ public sealed partial class BorgSystem
 
     private bool TrySetDerivedLayerState(
         Entity<BorgChassisComponent?, AppearanceComponent?, SpriteComponent?> ent,
-        BorgVisualLayers layer,
+        Enum layer,
         string bodyState,
         string suffix)
     {

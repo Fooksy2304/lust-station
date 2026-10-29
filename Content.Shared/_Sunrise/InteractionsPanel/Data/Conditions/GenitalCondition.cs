@@ -1,4 +1,4 @@
-using Content.Shared._Lust.Borgs;
+using Content.Shared.Humanoid;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._Sunrise.InteractionsPanel.Data.Conditions;
@@ -34,11 +34,10 @@ public sealed partial class GenitalCondition : IAppearCondition
 
     private bool HasRequiredGenital(EntityUid entity, EntityManager entityManager)
     {
-        // Lust edit - учитываем выбранный пол борга при определении гениталий.
-        if (!BorgSexSystem.TryGetSex(entity, entityManager, out var sex))
+        if (!entityManager.TryGetComponent<HumanoidProfileComponent>(entity, out var appearance))
             return false;
 
-        var genitals = GenitalsHelper.GetGenitals(sex);
+        var genitals = GenitalsHelper.GetGenitals(appearance.Sex);
         return genitals.Contains(RequiredGenital);
     }
 }

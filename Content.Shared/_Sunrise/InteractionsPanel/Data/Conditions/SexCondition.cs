@@ -1,4 +1,3 @@
-using Content.Shared._Lust.Borgs;
 using Content.Shared.Humanoid;
 using Robust.Shared.Serialization;
 
@@ -20,20 +19,19 @@ public sealed partial class SexCondition : IAppearCondition
     {
         if (CheckInitiator)
         {
-            // Lust edit - выбранный пол борга участвует в условиях взаимодействий.
-            if (!BorgSexSystem.TryGetSex(initiator, entityManager, out var initiatorSex))
+            if (!entityManager.TryGetComponent<HumanoidProfileComponent>(initiator, out var initiatorAppearance))
                 return false;
 
-            if (!RequiredSex.Contains(initiatorSex))
+            if (!RequiredSex.Contains(initiatorAppearance.Sex))
                 return false;
         }
 
         if (CheckTarget)
         {
-            if (!BorgSexSystem.TryGetSex(target, entityManager, out var targetSex))
+            if (!entityManager.TryGetComponent<HumanoidProfileComponent>(target, out var targetAppearance))
                 return false;
 
-            if (!RequiredSex.Contains(targetSex))
+            if (!RequiredSex.Contains(targetAppearance.Sex))
                 return false;
         }
 

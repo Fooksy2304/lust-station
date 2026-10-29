@@ -173,15 +173,4 @@ public enum BorgVisualLayers : byte
     /// </summary>
     LightStatus,
 
-    // Lust edit start - визуальные слои сидящего и сломанного борга
-    /// <summary>
-    /// Layer for the borg's voluntary resting state.
-    /// </summary>
-    Resting,
-
-    /// <summary>
-    /// Layer for the borg's wrecked state.
-    /// </summary>
-    Wrecked,
-    // Lust edit end
 }

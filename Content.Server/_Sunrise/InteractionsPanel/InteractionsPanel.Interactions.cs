@@ -2,8 +2,6 @@ using System.Numerics;
 using Content.Server._Sunrise.PlayerCache;
 using Content.Server.Chat.Systems;
 using Content.Server.Fluids.EntitySystems;
-using Content.Shared._Lust.Borgs;
-using Content.Shared._Lust.Borgs.Components;
 using Content.Shared._Sunrise.Aphrodisiac;
 using Content.Shared._Sunrise.InteractionsPanel.Data.Components;
 using Content.Shared._Sunrise.InteractionsPanel.Data.Prototypes;
@@ -54,7 +52,8 @@ public partial class InteractionsPanel
         SubscribeLocalEvent<InteractionsComponent, ClothingDidUnequippedEvent>(ClothingDidUnequipped);
         SubscribeLocalEvent<InteractionsComponent, DidEquipHandEvent>(DidEquipped);
         SubscribeLocalEvent<InteractionsComponent, DidUnequipHandEvent>(DidUnequipped);
-        SubscribeLocalEvent<BorgSexComponent, BorgSexChangedEvent>(OnBorgSexChanged); // Lust edit - обновляем открытую панель после выбора пола.
+        // Lust edit - регистрация обработчиков пола борга вынесена в код форка.
+        InitializeLustInteractions();
 
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.Interact, new PointerInputCmdHandler(HandleInteract))
@@ -322,10 +321,7 @@ public partial class InteractionsPanel
         if (string.IsNullOrWhiteSpace(type) || type == "none")
             return;
 
-        // Lust edit - пол борга выбирается отдельно от профиля гуманоида.
-        var sex = BorgSexSystem.TryGetSex(ent, EntityManager, out var selectedSex)
-            ? selectedSex.ToString().ToLowerInvariant()
-            : "unknown";
+        var sex = GetLustInteractionSex(ent);
 
         switch (type.ToLowerInvariant())
         {
@@ -506,8 +502,7 @@ public partial class InteractionsPanel
         _chatSystem.TrySendInGameICMessage(uid, "кончает", InGameICChatType.Emote, false);
         _chatSystem.TryEmoteWithChat(uid, "Moan");
 
-        // Lust edit - учитываем выбранный пол борга.
-        if (BorgSexSystem.TryGetSex(uid, EntityManager, out var selectedSex) && selectedSex == Sex.Male)
+        if (ShouldSpawnLustSemen(uid))
             SpawnSemen("Semen", Transform(uid).Coordinates);
         // Lust-Edit-Start
         RaiseLocalEvent(new OrgasmPerformedEvent
@@ -646,4 +641,10 @@ public partial class InteractionsPanel
 
         return result;
     }
+
+    private partial void InitializeLustInteractions();
+
+    private partial string GetLustInteractionSex(EntityUid uid);
+
+    private partial bool ShouldSpawnLustSemen(EntityUid uid);
 }

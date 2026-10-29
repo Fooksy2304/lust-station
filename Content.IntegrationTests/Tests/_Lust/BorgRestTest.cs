@@ -110,7 +110,7 @@ public sealed class BorgRestTest : GameTest
         {
             var clientBorg = CEntMan.GetEntity(borgNet);
             var sprite = Client.System<SpriteSystem>();
-            Assert.That(sprite.TryGetLayer((clientBorg, null), BorgVisualLayers.Resting, out var resting, false), Is.True);
+            Assert.That(sprite.TryGetLayer((clientBorg, null), LustBorgVisualLayers.Resting, out var resting, false), Is.True);
             Assert.That(resting!.Visible, Is.True);
         });
 
@@ -120,7 +120,7 @@ public sealed class BorgRestTest : GameTest
         {
             var clientBorg = CEntMan.GetEntity(borgNet);
             var sprite = Client.System<SpriteSystem>();
-            Assert.That(sprite.TryGetLayer((clientBorg, null), BorgVisualLayers.Resting, out var resting, false), Is.True);
+            Assert.That(sprite.TryGetLayer((clientBorg, null), LustBorgVisualLayers.Resting, out var resting, false), Is.True);
             Assert.That(resting!.Visible, Is.True);
         });
         await Client.WaitPost(() =>
