@@ -141,9 +141,13 @@ public sealed class BorgRestTest : GameTest
         var rested = false;
         var startedStanding = false;
         EntityUid? actionId = null;
+        NetEntity borgNet = default;
 
         await Server.WaitPost(() =>
-            actionId = SEntMan.GetComponent<BorgRestActionComponent>(borg).ToggleActionEntity);
+        {
+            actionId = SEntMan.GetComponent<BorgRestActionComponent>(borg).ToggleActionEntity;
+            borgNet = SEntMan.GetNetEntity(borg);
+        });
         await Server.WaitAssertion(() => Assert.That(actionId, Is.Not.Null));
 
         await Server.WaitPost(() =>
@@ -151,14 +155,19 @@ public sealed class BorgRestTest : GameTest
             var action = SEntMan.GetComponent<ActionComponent>(actionId!.Value);
             actions.PerformAction((borg, null), (actionId.Value, action));
             rested = SEntMan.HasComponent<BorgRestingComponent>(borg);
-            startedStanding = rest.TryToggleRest((borg, null));
         });
 
-        await Server.WaitAssertion(() =>
+        await Server.WaitAssertion(() => Assert.That(rested, Is.True));
+        await Pair.RunTicksSync(10);
+        await Client.WaitAssertion(() =>
         {
-            Assert.That(rested, Is.True);
-            Assert.That(startedStanding, Is.True);
+            var clientBorg = CEntMan.GetEntity(borgNet);
+            var sprite = CEntMan.GetComponent<SpriteComponent>(clientBorg);
+            Assert.That(sprite.Rotation.Degrees, Is.EqualTo(0).Within(0.01));
         });
+
+        await Server.WaitPost(() => startedStanding = rest.TryToggleRest((borg, null)));
+        await Server.WaitAssertion(() => Assert.That(startedStanding, Is.True));
 
         await Pair.RunTicksSync(45);
 
@@ -172,6 +181,13 @@ public sealed class BorgRestTest : GameTest
             var speed = SEntMan.GetComponent<MovementSpeedModifierComponent>(borg);
             Assert.That(speed.CurrentWalkSpeed, Is.GreaterThan(0f));
             Assert.That(speed.CurrentSprintSpeed, Is.GreaterThan(0f));
+        });
+
+        await Client.WaitAssertion(() =>
+        {
+            var clientBorg = CEntMan.GetEntity(borgNet);
+            var sprite = CEntMan.GetComponent<SpriteComponent>(clientBorg);
+            Assert.That(sprite.Rotation.Degrees, Is.EqualTo(0).Within(0.01));
         });
     }
 

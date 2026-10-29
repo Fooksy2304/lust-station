@@ -167,15 +167,15 @@ public sealed partial class SharedBorgRestActionSystem : EntitySystem
         return true;
     }
 
-    private void SetRestingVisualRotation(EntityUid uid, bool resting)
+    private void SetRestingVisualRotation(EntityUid uid)
     {
-        _appearance.SetData(uid, RotationVisuals.RotationState, resting ? RotationState.Horizontal : RotationState.Vertical);
+        _appearance.SetData(uid, RotationVisuals.RotationState, RotationState.Vertical);
     }
 
     private void SetRestingVisual(EntityUid uid, bool resting)
     {
         _appearance.SetData(uid, BorgRestVisuals.Resting, resting);
-        SetRestingVisualRotation(uid, resting);
+        SetRestingVisualRotation(uid);
     }
 
     private void ClearRestingVisual(EntityUid uid)
