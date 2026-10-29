@@ -5,6 +5,7 @@ using Content.Shared._Lust.Borgs.Components;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Movement.Components;
+using Content.Shared.Rotation;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Stunnable;
 using Robust.Client.GameObjects;
@@ -165,6 +166,9 @@ public sealed class BorgRestTest : GameTest
         {
             Assert.That(SEntMan.HasComponent<BorgRestingComponent>(borg), Is.False);
             Assert.That(SEntMan.HasComponent<KnockedDownComponent>(borg), Is.False);
+            var appearance = Server.System<SharedAppearanceSystem>();
+            Assert.That(appearance.TryGetData(borg, RotationVisuals.RotationState, out RotationState rotationState), Is.True);
+            Assert.That(rotationState, Is.EqualTo(RotationState.Vertical));
             var speed = SEntMan.GetComponent<MovementSpeedModifierComponent>(borg);
             Assert.That(speed.CurrentWalkSpeed, Is.GreaterThan(0f));
             Assert.That(speed.CurrentSprintSpeed, Is.GreaterThan(0f));
