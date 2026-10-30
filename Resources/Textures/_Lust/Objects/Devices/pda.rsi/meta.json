@@ -11,6 +11,9 @@
                        "name":  "id_overlay"
                    },
                    {
+                       "name":  "id_inserted"
+                   },
+                   {
                        "name":  "equipped-BELT",
                        "directions":  4
                    },

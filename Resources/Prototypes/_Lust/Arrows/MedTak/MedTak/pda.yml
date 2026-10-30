@@ -9,12 +9,14 @@
     appearanceDataInit:
      enum.PdaVisuals.PdaType:
        !type:String
-       pda-paramedic
+       pda-medtak
   - type: Pda
     id: LustMedTakMedicIDCard
   - type: PdaBorderColor
     accentVColor: "#d7d7d0"
     borderColor: "#600000"
+  - type: Sprite
+    sprite: _Lust/Objects/Devices/pda.rsi
   - type: Icon
     sprite: _Lust/Objects/Devices/pda.rsi
     state: pda-medtak

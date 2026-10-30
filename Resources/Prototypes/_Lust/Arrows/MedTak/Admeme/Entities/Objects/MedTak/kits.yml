@@ -61,6 +61,7 @@
   - type: Item
     size: Small
     sprite: _Lust/Admeme/Objects/MedTak/medkit.rsi
+    heldPrefix: medtak
   - type: PhysicalComposition
     materialComposition:
       Cloth: 100
@@ -101,6 +102,7 @@
     shape:
     - 0,0,2,1
     sprite: Objects/Specific/Medical/firstaidkits.rsi
+    heldPrefix: advkit
   - type: PhysicalComposition
     materialComposition:
       Plastic: 150
