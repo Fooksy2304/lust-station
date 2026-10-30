@@ -15,7 +15,7 @@
     jobTitle: job-name-medtak-leader
     jobIcon: LustJobIconMedTakLeader
   - type: Access
-    tags: [ LustMedTak ]
+    tags: [ LustMedTak, MTO, MTOL ]
 
 - type: entity
   parent: IDCardStandard
@@ -33,7 +33,7 @@
     jobTitle: job-name-medtak-dispatcher
     jobIcon: LustJobIconMedTakDispatcher
   - type: Access
-    tags: [ LustMedTak ]
+    tags: [ LustMedTak, MTO ]
 
 - type: entity
   parent: IDCardStandard
@@ -51,7 +51,7 @@
     jobTitle: job-name-medtak-medic
     jobIcon: LustJobIconMedTakMedic
   - type: Access
-    tags: [ LustMedTak ]
+    tags: [ LustMedTak, MTO ]
 
 - type: entity
   parent: IDCardStandard
@@ -69,7 +69,7 @@
     jobTitle: job-name-medtak-pilot
     jobIcon: LustJobIconMedTakPilot
   - type: Access
-    tags: [ LustMedTak ]
+    tags: [ LustMedTak, MTO ]
 
 - type: entity
   parent: IDCardStandard
@@ -87,4 +87,4 @@
     jobTitle: job-name-medtak-security
     jobIcon: LustJobIconMedTakSecurity
   - type: Access
-    tags: [ LustMedTak ]
+    tags: [ LustMedTak, MTO ]
