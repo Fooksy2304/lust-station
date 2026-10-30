@@ -1,7 +1,0 @@
-# MedTak mindshield icon
-- type: securityIcon
-  parent: MindShieldIcon
-  id: LustMedTakMindShieldIcon
-  icon:
-    sprite: /Textures/_Lust/Interface/Misc/job_icons.rsi
-    state: MedTakMindShield
