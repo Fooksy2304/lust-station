@@ -6,4 +6,3 @@ ghost-role-information-medtak-security-description = Защищайте кома
 ghost-role-information-medtak-borg-description = Помогайте команде Trauma Team ЧВК Arrows медицинским оборудованием и перевозкой пациентов.
 chat-radio-medtak = МедТак
 id-card-access-level-medtak = МедТак
-contraband-examine-text-medtak = МедТак

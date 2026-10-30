@@ -6,4 +6,3 @@ ghost-role-information-medtak-security-description = Protect the Trauma Team and
 ghost-role-information-medtak-borg-description = Support the Arrows Trauma Team with medical equipment and patient transport.
 chat-radio-medtak = MedTak
 id-card-access-level-medtak = MedTak
-contraband-examine-text-medtak = MedTak

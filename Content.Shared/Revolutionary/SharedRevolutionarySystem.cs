@@ -3,6 +3,8 @@ using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
 using Content.Shared.Revolutionary.Components;
 using Content.Shared.Stunnable;
+using Content.Shared.StatusIcon;
+using Robust.Shared.Prototypes;
 using Robust.Shared.GameStates;
 using Robust.Shared.Player;
 using Content.Shared.Antag;
@@ -26,6 +28,14 @@ public abstract partial class SharedRevolutionarySystem : EntitySystem
         SubscribeLocalEvent<ShowAntagIconsComponent, ComponentStartup>(DirtyRevComps);
     }
 
+    // Lust added start - устанавливаем на носителе иконку, заданную имплантом
+    public void SetMindShieldStatusIcon(EntityUid uid, ProtoId<SecurityIconPrototype> icon)
+    {
+        var mindShield = EnsureComp<MindShieldComponent>(uid);
+        mindShield.MindShieldStatusIcon = icon;
+        Dirty(uid, mindShield);
+    }
+    // Lust added end
     /// <summary>
     /// When the mindshield is implanted in the rev it will popup saying they were deconverted. In Head Revs it will remove the mindshield component.
     /// </summary>

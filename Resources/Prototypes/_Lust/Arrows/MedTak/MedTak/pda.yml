@@ -9,7 +9,7 @@
     appearanceDataInit:
      enum.PdaVisuals.PdaType:
        !type:String
-       pda-medtak
+       pda-paramedic
   - type: Pda
     id: LustMedTakMedicIDCard
   - type: PdaBorderColor

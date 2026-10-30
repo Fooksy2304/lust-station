@@ -2,6 +2,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Server.Roles;
+using Content.Server.Revolutionary;
 using Content.Shared.Database;
 using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
@@ -22,6 +23,7 @@ public sealed partial class MindShieldSystem : EntitySystem
     [Dependency] private RoleSystem _roleSystem = default!;
     [Dependency] private MindSystem _mindSystem = default!;
     [Dependency] private PopupSystem _popupSystem = default!;
+    [Dependency] private RevolutionarySystem _revolutionarySystem = default!;
 
     public override void Initialize()
     {
@@ -34,7 +36,9 @@ public sealed partial class MindShieldSystem : EntitySystem
 
     private void OnImplantImplanted(Entity<MindShieldImplantComponent> ent, ref ImplantImplantedEvent ev)
     {
-        EnsureComp<MindShieldComponent>(ev.Implanted);
+        // Lust edit start - применяем иконку, заданную на импланте
+        _revolutionarySystem.SetMindShieldStatusIcon(ev.Implanted, ent.Comp.MindShieldStatusIcon);
+        // Lust edit end
         MindShieldRemovalCheck(ev.Implanted, ev.Implant);
     }
 

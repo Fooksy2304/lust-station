@@ -15,3 +15,6 @@
   name: MedTak mindshield implant
   description: This implant protects operators from mind control devices.
   categories: [ HideSpawnMenu ]
+  components:
+  - type: MindShieldImplant
+    mindShieldStatusIcon: LustMedTakMindShieldIcon
